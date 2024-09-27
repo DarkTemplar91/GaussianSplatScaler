@@ -281,5 +281,5 @@ def readColmapSceneInfo(path, output_path):
 
     for cam_id, cam in enumerate(cam_infos):
         json_cams.append(camera_to_JSON(cam_id, cam))
-    with open(os.path.join(output_path, "cameras.json"), 'w') as file:  # TODO: Use output file
+    with open(os.path.join(output_path, "cameras.json"), 'w') as file:
         json.dump(json_cams, file)
