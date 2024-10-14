@@ -119,8 +119,10 @@ class GaussianModel:
         attributes = np.concatenate((xyz, normals, f_dc, f_rest, opacities, scale, rotation), axis=1)
         elements[:] = list(map(tuple, attributes))
         el = PlyElement.describe(elements, 'vertex')
-        plydata = PlyData([el])
-        plydata.write(path)
+        plydata = PlyData(text=False,
+                          byte_order='<',
+                          elements=[el])
+        PlyData.write(plydata, path)
 
     def transform_gaussian_model(self, transformation_matrix):
         rotation_matrix = transformation_matrix[:3, :3]
@@ -150,4 +152,3 @@ class GaussianModel:
         scaled_points = translated_points * scale_factor
         self._xyz = scaled_points - centroid
         self._scaling += self.scaling_inverse_activation(scale_factor)
-
